@@ -20,7 +20,8 @@
 		"access": "public"
 	},
 	"pi": {
-		"extensions": ["./model-selector-x.ts"]
+		"extensions": ["./model-selector-x.ts"],
+		"image": "https://raw.githubusercontent.com/Dwsy/pi-model-selector-x/main/screenshots/after.svg"
 	},
 	"peerDependencies": {
 		"@mariozechner/pi-coding-agent": "*",

@@ -27,8 +27,12 @@ This extension patches the `/model` internals and could break if pi updates in a
     <th width="50%">After</th>
   </tr>
   <tr>
-    <td width="50%">The built-in model selector shows only <code>model-id [provider] ✓</code></td>
-    <td width="50%">ModelSelectorX adds a detail pane with context, cost, protocol, and more</td>
+    <td width="50%"><img src="screenshots/before.svg" alt="Built-in /model selector showing only model-id and provider" width="100%" /></td>
+    <td width="50%"><img src="screenshots/after.svg" alt="Enhanced /model selector with detail pane showing context, cost, protocol, input, and reasoning" width="100%" /></td>
+  </tr>
+  <tr>
+    <td>The built-in selector shows only <code>model-id [provider] ✓</code>. No context window, cost, or capability info.</td>
+    <td>ModelSelectorX adds a detail pane with context window, max output, API protocol, input modalities, reasoning indicator, and cost breakdown.</td>
   </tr>
 </table>
 
@@ -43,8 +47,8 @@ The detail pane appears below the model list and shows:
 | Protocol | `model.api` | `resp` / `comp` / `anth` |
 | Input | `model.input` | `txt+img` / `txt` |
 | Reasoning | `model.reasoning` | `⚡ reasoning` |
-| Cost | `model.cost` | `free` / `$0.3 / $1.2` |
-| Cache | `model.cost.cacheRead/Write` | `$0.03` |
+| Cost | `model.cost` | `$2.50 / $15.00` / `free` |
+| Cache | `model.cost.cacheRead/Write` | `$0.25` |
 
 ### Protocol abbreviations
 
