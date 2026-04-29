@@ -1,0 +1,33 @@
+{
+	"name": "pi-model-selector-x",
+	"version": "0.1.0",
+	"description": "Enhances pi's /model selector with context window, cost, input modalities, protocol, and reasoning info",
+	"type": "module",
+	"main": "./model-selector-x.ts",
+	"files": ["model-selector-x.ts", "src", "README.md", "CHANGELOG.md", "LICENSE"],
+	"keywords": ["pi-package", "pi", "pi-extension", "model", "selector", "model-selector-x"],
+	"author": "Dwsy",
+	"license": "MIT",
+	"homepage": "https://github.com/Dwsy/pi-model-selector-x#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Dwsy/pi-model-selector-x.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Dwsy/pi-model-selector-x/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"pi": {
+		"extensions": ["./model-selector-x.ts"]
+	},
+	"peerDependencies": {
+		"@mariozechner/pi-coding-agent": "*",
+		"@mariozechner/pi-tui": "*"
+	},
+	"devDependencies": {
+		"@mariozechner/pi-coding-agent": "0.70.2",
+		"@mariozechner/pi-tui": "0.70.2"
+	}
+}
