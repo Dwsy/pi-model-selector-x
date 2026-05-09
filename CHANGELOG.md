@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 - 2026-05-09
+
+### Changed
+
+- Migrated from `@mariozechner/*` to `@earendil-works/*` package namespace (pi 0.74.0)
+- Updated peerDependencies and devDependencies to match pi 0.74.0
+
 ## 0.1.0 - 2026-04-29
 
 ### Added

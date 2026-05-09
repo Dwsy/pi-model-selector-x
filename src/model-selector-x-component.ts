@@ -1,7 +1,7 @@
-import { Spacer, Text } from "@mariozechner/pi-tui";
+import { Spacer, Text } from "@earendil-works/pi-tui";
 
 const UPDATE_LIST_PATCH = Symbol.for("pi-model-selector-x:update-list-patch");
-const THEME_KEY = Symbol.for("@mariozechner/pi-coding-agent:theme");
+const THEME_KEY = Symbol.for("@earendil-works/pi-coding-agent:theme");
 
 // ── Theme ──
 

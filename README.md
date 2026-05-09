@@ -88,6 +88,6 @@ After installation, open the model selector with the built-in keybinding or:
 
 ## Notes
 
-- Tested with pi 0.70.2
+- Tested with pi 0.74.0
 - ModelSelectorX patches the native `/model` path, so the built-in slash command and model hotkey keep using pi's own navigation and selection flow.
 - ModelSelectorX relies on private model-selector internals, so upstream pi changes may require ModelSelectorX updates.

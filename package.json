@@ -1,6 +1,6 @@
 {
 	"name": "pi-model-selector-x",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Enhances pi's /model selector with context window, cost, input modalities, protocol, and reasoning info",
 	"type": "module",
 	"main": "./model-selector-x.ts",
@@ -24,11 +24,11 @@
 		"image": "https://raw.githubusercontent.com/Dwsy/pi-model-selector-x/main/screenshots/after.svg"
 	},
 	"peerDependencies": {
-		"@mariozechner/pi-coding-agent": "*",
-		"@mariozechner/pi-tui": "*"
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*"
 	},
 	"devDependencies": {
-		"@mariozechner/pi-coding-agent": "0.70.2",
-		"@mariozechner/pi-tui": "0.70.2"
+		"@earendil-works/pi-coding-agent": "0.74.0",
+		"@earendil-works/pi-tui": "0.74.0"
 	}
 }
