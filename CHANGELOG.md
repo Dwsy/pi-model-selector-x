@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Show the selected model/provider `baseUrl` in the TUI detail pane.
+
 ## 0.2.0 - 2026-05-09
 
 ### Changed

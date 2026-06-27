@@ -17,6 +17,7 @@ This extension patches the `/model` internals and could break if pi updates in a
 - Input modalities (`txt`, `txt+img`, `txt+img+aud`)
 - Reasoning capability indicator
 - Cost breakdown (input / output / cache read / cache write)
+- Base URL for the selected model/provider
 - Free model detection
 
 ## Screenshots
@@ -49,6 +50,7 @@ The detail pane appears below the model list and shows:
 | Reasoning | `model.reasoning` | `⚡ reasoning` |
 | Cost | `model.cost` | `$2.50 / $15.00` / `free` |
 | Cache | `model.cost.cacheRead/Write` | `$0.25` |
+| BaseURL | `model.baseUrl` | `https://api.example.com/v1` |
 
 ### Protocol abbreviations
 

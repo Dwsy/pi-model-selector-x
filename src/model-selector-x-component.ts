@@ -2,6 +2,55 @@ import { Spacer, Text } from "@earendil-works/pi-tui";
 
 const UPDATE_LIST_PATCH = Symbol.for("pi-model-selector-x:update-list-patch");
 const THEME_KEY = Symbol.for("@earendil-works/pi-coding-agent:theme");
+const APIKEY_CACHE = Symbol.for("pi-model-selector-x:apikey-cache");
+
+// ── API key masking ──
+
+function maskApiKey(key) {
+	if (!key || typeof key !== "string") return null;
+	const k = key.trim();
+	if (k.length === 0) return null;
+	if (k.length <= 8) return "*".repeat(k.length);
+	const head = k.slice(0, 6);
+	const tail = k.slice(-4);
+	return `${head}…${tail}`;
+}
+
+function getApiKeyCache(selector) {
+	let cache = selector[APIKEY_CACHE];
+	if (!cache) {
+		cache = new Map();
+		selector[APIKEY_CACHE] = cache;
+	}
+	return cache;
+}
+
+function resolveApiKeyDisplay(selector, model) {
+	const registry = selector.modelRegistry;
+	if (!registry?.getApiKeyAndHeaders) return null;
+	const cache = getApiKeyCache(selector);
+	const key = `${model.provider}:${model.id}`;
+	if (cache.has(key)) return cache.get(key);
+
+	cache.set(key, { state: "loading" });
+	Promise.resolve()
+		.then(() => registry.getApiKeyAndHeaders(model))
+		.then((result) => {
+			if (result?.ok && result.apiKey) {
+				cache.set(key, { state: "ok", masked: maskApiKey(result.apiKey), len: result.apiKey.length });
+			} else if (result?.ok) {
+				cache.set(key, { state: "none" });
+			} else {
+				cache.set(key, { state: "error", error: result?.error || "unknown" });
+			}
+			selector.tui?.requestRender?.();
+		})
+		.catch((err) => {
+			cache.set(key, { state: "error", error: err?.message || String(err) });
+			selector.tui?.requestRender?.();
+		});
+	return { state: "loading" };
+}
 
 // ── Theme ──
 
@@ -127,6 +176,40 @@ function appendDetailPane(selector) {
 		}
 
 		selector.listContainer.addChild(new Text(`  ${costLine}`, 0, 0));
+	}
+
+	if (model.baseUrl) {
+		selector.listContainer.addChild(
+			new Text(theme.fg("muted", "  BaseURL ") + theme.fg("muted", model.baseUrl), 0, 0),
+		);
+	}
+
+	// Line: masked API key for quick visual identification
+	const keyInfo = resolveApiKeyDisplay(selector, { ...model, provider: providerId, id: model.id });
+	if (keyInfo) {
+		let keyLine;
+		switch (keyInfo.state) {
+			case "loading":
+				keyLine = theme.fg("muted", "  APIKey  ") + theme.fg("muted", "…");
+				break;
+			case "ok":
+				keyLine =
+					theme.fg("muted", "  APIKey  ") +
+					theme.fg("accent", keyInfo.masked) +
+					theme.fg("muted", `  (${keyInfo.len} chars)`);
+				break;
+			case "none":
+				keyLine = theme.fg("muted", "  APIKey  ") + theme.fg("warning", "not configured");
+				break;
+			case "error":
+				keyLine = theme.fg("muted", "  APIKey  ") + theme.fg("error", keyInfo.error);
+				break;
+			default:
+				keyLine = null;
+		}
+		if (keyLine) {
+			selector.listContainer.addChild(new Text(keyLine, 0, 0));
+		}
 	}
 }
 
