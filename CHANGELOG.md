@@ -6,6 +6,10 @@
 
 - Show the selected model/provider `baseUrl` in the TUI detail pane.
 
+### Fixed
+
+- Resolve `ModelSelectorComponent` from pi's live bundle on pi >= 0.84.3 (bundled CLI): the previous code imported the dead unbundled copy, so the extension loaded but silently did nothing. Also handles the pi >= 0.86.0 entry-shim layout, where `cli.js` no longer references the hashed chunks.
+
 ## 0.2.0 - 2026-05-09
 
 ### Changed
