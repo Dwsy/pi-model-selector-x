@@ -1,6 +1,6 @@
 {
 	"name": "pi-model-selector-x",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Enhances pi's /model selector with context window, cost, input modalities, protocol, and reasoning info",
 	"type": "module",
 	"main": "./model-selector-x.ts",
@@ -28,7 +28,7 @@
 		"@earendil-works/pi-tui": "*"
 	},
 	"devDependencies": {
-		"@earendil-works/pi-coding-agent": "0.74.0",
-		"@earendil-works/pi-tui": "0.74.0"
+		"@earendil-works/pi-coding-agent": "0.86.1",
+		"@earendil-works/pi-tui": "0.86.1"
 	}
 }

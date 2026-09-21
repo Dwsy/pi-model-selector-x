@@ -26,15 +26,28 @@ function getApiKeyCache(selector) {
 }
 
 function resolveApiKeyDisplay(selector, model) {
-	const registry = selector.modelRegistry;
-	if (!registry?.getApiKeyAndHeaders) return null;
+	// pi >= 0.85 moved model access from ModelRegistry to ModelRuntime.
+	// The selector now owns modelRuntime directly, while older releases exposed
+	// modelRegistry. Support both shapes so the extension remains backwards compatible.
+	const registry = selector.modelRegistry ?? selector.modelRuntime;
+	if (!registry?.getApiKeyAndHeaders && !registry?.getAuth) return null;
 	const cache = getApiKeyCache(selector);
 	const key = `${model.provider}:${model.id}`;
 	if (cache.has(key)) return cache.get(key);
 
 	cache.set(key, { state: "loading" });
 	Promise.resolve()
-		.then(() => registry.getApiKeyAndHeaders(model))
+		.then(async () => {
+			if (registry.getApiKeyAndHeaders) return registry.getApiKeyAndHeaders(model);
+			try {
+				const resolution = await registry.getAuth(model);
+				return resolution
+					? { ok: true, apiKey: resolution.auth?.apiKey, headers: resolution.auth?.headers }
+					: { ok: true };
+			} catch (err) {
+				return { ok: false, error: err?.message || String(err) };
+			}
+		})
 		.then((result) => {
 			if (result?.ok && result.apiKey) {
 				cache.set(key, { state: "ok", masked: maskApiKey(result.apiKey), len: result.apiKey.length });
