@@ -1,10 +1,16 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 - 2026-09-30
 
 ### Added
 
 - Show the selected model/provider `baseUrl` in the TUI detail pane.
+
+### Fixed
+
+- Resolve `ModelSelectorComponent` from pi's live module by importing the `@earendil-works/pi-coding-agent` package specifier. Restores functionality on pi >= 0.84.3 (bundled CLI), where the per-file dist imports the extension previously used are dead copies, and on pi >= 0.86.0's entry-shim layout.
+- Support pi >= 0.85 `ModelRuntime.getAuth` for the API-key display, falling back to the legacy `ModelRegistry.getApiKeyAndHeaders`.
+- Verified against pi 0.99.1; retains compatibility with the older 0.74.x selector shape.
 
 ## 0.2.0 - 2026-05-09
 
